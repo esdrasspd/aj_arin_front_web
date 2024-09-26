@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/manejo-nomina-pages/build/static/css/main.819e19bf.css",
+    "main.js": "/manejo-nomina-pages/build/static/js/main.e9ee7f4d.js",
+    "static/js/216.d59811e3.chunk.js": "/manejo-nomina-pages/build/static/js/216.d59811e3.chunk.js",
+    "static/js/822.a2f8e98a.chunk.js": "/manejo-nomina-pages/build/static/js/822.a2f8e98a.chunk.js",
+    "static/js/191.e72467c3.chunk.js": "/manejo-nomina-pages/build/static/js/191.e72467c3.chunk.js",
+    "static/media/oficina.mp4": "/manejo-nomina-pages/build/static/media/oficina.25defcb5374b81379402.mp4",
+    "static/media/nomina2.jpeg": "/manejo-nomina-pages/build/static/media/nomina2.c9714cc1f601d1d62603.jpeg",
+    "static/media/nomina1.jpeg": "/manejo-nomina-pages/build/static/media/nomina1.3564ad631195885ae5f6.jpeg",
+    "static/media/kaushan-script-all-400-normal.woff": "/manejo-nomina-pages/build/static/media/kaushan-script-all-400-normal.ba623d1ca520a2a711d2.woff",
+    "static/media/sirin-stencil-all-400-normal.woff": "/manejo-nomina-pages/build/static/media/sirin-stencil-all-400-normal.e1b8add18154b5d65682.woff",
+    "static/media/kaushan-script-latin-400-normal.woff2": "/manejo-nomina-pages/build/static/media/kaushan-script-latin-400-normal.2855d49bba6b2cb7bec5.woff2",
+    "static/media/sirin-stencil-latin-400-normal.woff2": "/manejo-nomina-pages/build/static/media/sirin-stencil-latin-400-normal.f668f96beabdc683277b.woff2",
+    "static/media/kaushan-script-latin-ext-400-normal.woff2": "/manejo-nomina-pages/build/static/media/kaushan-script-latin-ext-400-normal.5a05e21384fe4b1b9db7.woff2",
+    "index.html": "/manejo-nomina-pages/build/index.html",
+    "static/media/star_white_48dp.svg": "/manejo-nomina-pages/build/static/media/star_white_48dp.808b259deb685769240560a11e239a7f.svg",
+    "main.819e19bf.css.map": "/manejo-nomina-pages/build/static/css/main.819e19bf.css.map",
+    "main.e9ee7f4d.js.map": "/manejo-nomina-pages/build/static/js/main.e9ee7f4d.js.map",
+    "216.d59811e3.chunk.js.map": "/manejo-nomina-pages/build/static/js/216.d59811e3.chunk.js.map",
+    "822.a2f8e98a.chunk.js.map": "/manejo-nomina-pages/build/static/js/822.a2f8e98a.chunk.js.map",
+    "191.e72467c3.chunk.js.map": "/manejo-nomina-pages/build/static/js/191.e72467c3.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.819e19bf.css",
+    "static/js/main.e9ee7f4d.js"
+  ]
+}
