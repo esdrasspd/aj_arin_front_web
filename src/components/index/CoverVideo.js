@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import MainVideo from "../../assets/oficina.mp4";
+import MainVideo from "../../assets/trabajadores.mp4";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 const VideoContainer = styled.section`
@@ -126,29 +126,29 @@ const CoverVideo = () => {
       <Title variants={container} initial="hidden" animate="show">
         <div>
           <motion.h1 variants={item} data-scroll data-scroll-delay="0.13" data-scroll-speed="4">
-            N
+            A
           </motion.h1>
           <motion.h1 variants={item} data-scroll data-scroll-delay="0.09" data-scroll-speed="4">
-            o
+            j
           </motion.h1>
           <motion.h1 variants={item} data-scroll data-scroll-delay="0.06" data-scroll-speed="4">
-            m
+              
+          </motion.h1>
+          <motion.h1 variants={item} data-scroll data-scroll-delay="0.04" data-scroll-speed="4">
+             A
+          </motion.h1>
+          <motion.h1 variants={item} data-scroll data-scroll-delay="0.04" data-scroll-speed="4">
+            r
           </motion.h1>
           <motion.h1 variants={item} data-scroll data-scroll-delay="0.04" data-scroll-speed="4">
             i
           </motion.h1>
           <motion.h1 variants={item} data-scroll data-scroll-delay="0.04" data-scroll-speed="4">
-            N
-          </motion.h1>
-          <motion.h1 variants={item} data-scroll data-scroll-delay="0.04" data-scroll-speed="4">
-            e
-          </motion.h1>
-          <motion.h1 variants={item} data-scroll data-scroll-delay="0.04" data-scroll-speed="4">
-            t
+            n
           </motion.h1>
         </div>
         <motion.h2 variants={item} data-scroll data-scroll-delay="0.04" data-scroll-speed="2">
-          Cálculos, pagos, sencillez
+          Realiza reportes fácilmente: Carreteras, tuberías, basureros, otros.
         </motion.h2>
         <br></br>
         <br></br>

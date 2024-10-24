@@ -6,17 +6,26 @@ import 'locomotive-scroll/dist/locomotive-scroll.css';
 import { AnimatePresence } from "framer-motion";
 import Home from "./sections/index/Home";
 import About from "./sections/index/About";
-import Shop from "./sections/index/Shop";
 import ScrollTriggerProxy from './components/index/ScrollTriggerProxy';
 import Footer from './sections/index/Footer';
 import Loader from "./components/index/Loader";
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import Login from "./components/login/Login";
 import Dashboard from "./components/dashboard/Dashboard";
-import User from "./components/user/User";
-import Sidebar from "./sections/reutilizables/SidebarCustom";
-import { Business } from "@mui/icons-material";
-import Empresa from "./components/empresa/Empresa";
+import Reportes from "./components/reportes/Reportes";
+import Administradores from "./components/administradores/Administradores";
+import InactivityHandler from "./InactivityHandler";
+
+function ProtectedRoute({ element }) {
+  const name = localStorage.getItem('name');
+  const dpi = localStorage.getItem('dpi');
+
+  if (!name || !dpi) {
+    return <Navigate to="/" />;
+  }
+
+  return element;
+}
 
 function App() {
   const location = useLocation();
@@ -29,31 +38,17 @@ function App() {
   }, []);
 
   const isLoginPage = location.pathname === '/login';
-  const isDashboardPage = location.pathname === '/dashboard';
-  const isUserPage = location.pathname === '/user';
-  const isBusinessPage = location.pathname === '/business';
 
   return (
     <ThemeProvider theme={dark}>
       <GlobalStyles />
-      {isDashboardPage ? (
-        <main className='App'>
-          <Dashboard />
-        </main>
-      ): isBusinessPage ? (
-        <main className='App'>
-          <Empresa />
-        </main>
-      ) : isUserPage ? (
-        <main className='App'>
-          <User />
-        </main>
-      ) : isLoginPage ? (
+      {isLoginPage ? (
         <main className='App'>
           <Login />
         </main>
       ) : (
         <>
+          <InactivityHandler />
           <AnimatePresence>
             {loaded ? null : <Loader />}
           </AnimatePresence>
@@ -61,9 +56,7 @@ function App() {
           <AnimatePresence>
             <main className='App' data-scroll-container>
               <Home />
-              <About />
-              <Shop />
-              <Footer />
+
             </main>
           </AnimatePresence>
         </>
@@ -74,14 +67,12 @@ function App() {
 
 export default function AppWrapper() {
   return (
-
       <Routes>
-      <Route path="/" element={<App />} />
-      <Route path="/login" element={<App />} />
-      <Route path="/dashboard" element={<App />} />
-      <Route path="/user" element={<App />} />
-      <Route path="/business" element={<App />} />
-      {/* Añadir otras rutas aquí si es necesario */}
-    </Routes>
+        <Route path="/" element={<App />} />
+        <Route path="/login" element={<App />} />
+        <Route path="/dashboard" element={<ProtectedRoute element={<Dashboard />} />} />
+        <Route path="/admins" element={<ProtectedRoute element={<Administradores />} />} />
+        <Route path="/reports" element={<ProtectedRoute element={<Reportes />} />} />
+      </Routes>
   );
 }

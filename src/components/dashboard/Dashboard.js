@@ -1,19 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AppBar, Toolbar, Typography, Container, Box, CssBaseline, Paper, Drawer, IconButton, Grid, useTheme, Card, CardContent, CardHeader } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
 import Sidebar from '../../sections/reutilizables/SidebarCustom';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import InfoIcon from '@mui/icons-material/Info';
-import PeopleIcon from '@mui/icons-material/People';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import axios from 'axios';
+import { apiURL } from '../../config/apiConfig';
 
 const Dashboard = () => {
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
+  const [reports, setReports] = useState({ Nuevo: '0', EnEjecucion: '0', Finalizado: '0' });
+
+  const getReports = async () => {
+    try {
+      const response = await axios.get(`${apiURL}/contarReportes`);
+      if (response.data.code === '200') {
+        const data = JSON.parse(response.data.message);
+        setReports(data);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
+
+  useEffect(() => {
+    getReports();
+  }, []);
+
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'row' }}>
@@ -37,10 +52,10 @@ const Dashboard = () => {
           <Container>
             <Paper elevation={3} sx={{ padding: theme.spacing(3), backgroundColor: '#ffffff', borderRadius: '8px', boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)' }}>
               <Typography variant="h4" gutterBottom sx={{ textAlign: 'center', marginTop: theme.spacing(3), fontWeight: 500 }}>
-                Bienvenido a Nominet
+                Bienvenido a Aj Arin
               </Typography>
               <Typography variant="body1" paragraph>
-                Desde acá podrás manejar tu negocio de manera sencilla y eficiente. Utiliza las herramientas a continuación para obtener una visión rápida de tus estadísticas y gestión.
+                Desde acá podrás manejar los reporte de los usuarios.
               </Typography>
             </Paper>
 
@@ -48,56 +63,29 @@ const Dashboard = () => {
               <Grid container spacing={3}>
                 <Grid item xs={12} sm={6} md={4}>
                   <Card>
-                    <CardHeader
-                      title="Estadísticas de Ventas"
-                      subheader="Visión general de ventas"
-                      avatar={<BarChartIcon sx={{ bgcolor: '#003366' }} />}
-                    />
                     <CardContent>
-                      <Typography variant="h6">Ventas Totales</Typography>
-                      <Typography variant="body1">Q45,000</Typography>
+                      <Typography variant="h6">Reportes Nuevos</Typography>
+                      <Typography variant="body1">{reports.Nuevo}</Typography>
                     </CardContent>
                   </Card>
                 </Grid>
                 <Grid item xs={12} sm={6} md={4}>
                   <Card>
-                    <CardHeader
-                      title="Información General"
-                      subheader="Resumen de la empresa"
-                      avatar={<InfoIcon sx={{ bgcolor: '#003366' }} />}
-                    />
                     <CardContent>
-                      <Typography variant="h6">Número de Empleados</Typography>
-                      <Typography variant="body1">120</Typography>
+                      <Typography variant="h6">Reportes En Ejecución</Typography>
+                      <Typography variant="body1">{reports.EnEjecucion}</Typography>
                     </CardContent>
                   </Card>
                 </Grid>
                 <Grid item xs={12} sm={6} md={4}>
                   <Card>
-                    <CardHeader
-                      title="Calendario de Eventos"
-                      subheader="Próximos eventos"
-                      avatar={<CalendarTodayIcon sx={{ bgcolor: '#003366' }} />}
-                    />
                     <CardContent>
-                      <Typography variant="h6">Próximo Evento</Typography>
-                      <Typography variant="body1">Reunión de equipo - 5 de Octubre</Typography>
+                      <Typography variant="h6">Reportes Finalizados</Typography>
+                      <Typography variant="body1">{reports.Finalizado}</Typography>
                     </CardContent>
                   </Card>
                 </Grid>
-                <Grid item xs={12} sm={6} md={4}>
-                  <Card>
-                    <CardHeader
-                      title="Usuarios Activos"
-                      subheader="Datos de usuarios"
-                      avatar={<PeopleIcon sx={{ bgcolor: '#003366' }} />}
-                    />
-                    <CardContent>
-                      <Typography variant="h6">Usuarios Activos</Typography>
-                      <Typography variant="body1">350</Typography>
-                    </CardContent>
-                  </Card>
-                </Grid>
+
               </Grid>
             </Box>
           </Container>

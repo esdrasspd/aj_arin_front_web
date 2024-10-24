@@ -3,6 +3,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { apiURL} from '../../config/apiConfig';
+import {jwtDecode} from 'jwt-decode';
 
 const Container = styled.div`
   display: flex;
@@ -97,11 +98,11 @@ const Login = () => {
     setLoading(true);
     setError('');
 
-    const api = apiURL + '/login';
+    const api = apiURL + '/loginWeb';
 
     try {
       const response = await axios.post(api, {
-        UserName: userName,
+        Dpi: userName,
         Password: password
       });
 
@@ -109,7 +110,15 @@ const Login = () => {
 
       if (response.data.code === '200') {
         console.log('Login exitoso:', response.data);
-        alert('Login exitoso');
+
+        const token = response.data.message;
+        const decoded = jwtDecode(token);
+
+        const name = decoded.name;
+        const dpi = decoded.dpi;
+
+        localStorage.setItem('name', name);
+        localStorage.setItem('dpi', dpi);
         
         // Redirige al dashboard
         navigate('/dashboard');
@@ -131,7 +140,7 @@ const Login = () => {
         {error && <ErrorMessage>{error}</ErrorMessage>}
         <form onSubmit={handleLogin}>
           <FormGroup>
-            <Label>Nombre de usuario</Label>
+            <Label>DPI</Label>
             <Input
               type="text"
               value={userName}

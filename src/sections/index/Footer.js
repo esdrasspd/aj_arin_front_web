@@ -126,9 +126,9 @@ const Footer = () => {
   return (
     <Section>
       <LogoContainer>
-        <img data-scroll data-scroll-speed="2" src={Logo} alt="NomiNet" />
+        <img data-scroll data-scroll-speed="2" src={Logo} alt="AjArin" />
         <h3 data-scroll data-scroll-speed="-1">
-          NomiNet
+          Aj Arin
         </h3>
       </LogoContainer>
       <FooterComponent

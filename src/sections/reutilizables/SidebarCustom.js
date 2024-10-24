@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 import "react-pro-sidebar/dist/css/styles.css";
-import { tokens } from "./theme";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
 import { BusinessCenterOutlined } from "@mui/icons-material";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
+import { tokens } from "./theme";
 
-const Item = ({ title, to, icon, selected }) => {
+const Item = ({ title, to, icon, selected, onClick }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   return (
@@ -19,8 +19,9 @@ const Item = ({ title, to, icon, selected }) => {
         color: colors.grey[100],
       }}
       icon={React.cloneElement(icon, {
-        style: { fontSize: '24px', color: colors.greenAccent[400] }, // Icono más grande y con color vibrante
+        style: { fontSize: "24px", color: colors.greenAccent[400] }, // Icono más grande y con color vibrante
       })}
+      onClick={onClick} // Agregar la funcionalidad onClick aquí
     >
       <Typography>{title}</Typography>
       <Link to={to} />
@@ -28,10 +29,20 @@ const Item = ({ title, to, icon, selected }) => {
   );
 };
 
+
 const Sidebar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [name, setName] = useState(""); // Estado para almacenar el nombre
+
+  // useEffect para obtener el nombre de localStorage
+  useEffect(() => {
+    const storedName = localStorage.getItem("name");
+    if (storedName) {
+      setName(storedName); // Actualizar el estado con el nombre almacenado
+    }
+  }, []);
 
   return (
     <Box
@@ -73,7 +84,7 @@ const Sidebar = () => {
                 ml="15px"
               >
                 <Typography variant="h4" color={colors.grey[100]}>
-                  NomiNet
+                  Aj Arin
                 </Typography>
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                   <MenuOutlinedIcon />
@@ -91,20 +102,20 @@ const Sidebar = () => {
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  Abel
+                  {name || "Abel"} {/* Mostrar el nombre del localStorage o "Abel" como valor por defecto */}
                 </Typography>
                 <Typography
-                  variant="h6" // Tamaño ajustado para el texto de Recursos Humanos
-                  color={colors.greenAccent[500]} // Color vibrante
+                  variant="h6"
+                  color={colors.greenAccent[500]}
                   fontWeight="bold"
-                  letterSpacing="0.05em" // Añadido espaciado entre letras
-                  lineHeight="1.5" // Altura de línea para mejor legibilidad
+                  letterSpacing="0.05em"
+                  lineHeight="1.5"
                   sx={{
                     m: "10px 0 0 0",
-                    fontFamily: "'Roboto', sans-serif", // Fuente moderna
+                    fontFamily: "'Roboto', sans-serif",
                   }}
                 >
-                  Recursos Humanos
+                  Administrador
                 </Typography>
               </Box>
             </Box>
@@ -114,18 +125,30 @@ const Sidebar = () => {
             <Item
               title="Dashboard"
               to="/dashboard"
-              icon={<HomeOutlinedIcon style={{ fontSize: '24px', color: '#FFD700' }} />} // Ícono dorado y grande
+              icon={<HomeOutlinedIcon style={{ fontSize: "24px", color: "#FFD700" }} />}
             />
             <Item
-              title="Usuarios"
-              to="/user"
-              icon={<PeopleOutlinedIcon style={{ fontSize: '24px', color: '#00BFFF' }} />} // Ícono azul eléctrico
+              title="Reportes"
+              to="/reports"
+              icon={<BusinessCenterOutlined style={{ fontSize: "24px", color: "#32CD32" }} />}
             />
             <Item
-              title="Empresas"
-              to="/business"
-              icon={<BusinessCenterOutlined style={{ fontSize: '24px', color: '#32CD32' }} />} // Ícono verde lima
+              title="Administradores"
+              to="/admins"
+              icon={<PeopleOutlinedIcon style={{ fontSize: "24px", color: "#00BFFF" }} />}
             />
+
+            <Item
+              title="Cerrar Sesión"
+              to="/"
+              icon={<HomeOutlinedIcon style={{ fontSize: "24px", color: "#FFD700" }} />}
+              onClick={() => {
+                // Elimina el token del localStorage
+                localStorage.removeItem("name");
+                localStorage.removeItem("dpi");
+              }}
+            />
+
           </Box>
         </Menu>
       </ProSidebar>

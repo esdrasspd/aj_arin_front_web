@@ -16,7 +16,6 @@ const Home = () => {
     <Section id="home">
       <Suspense fallback={<></>}>
         <Logo />
-        <NavBar />
         <CoverVideo />
       </Suspense>
     </Section>
